@@ -1,0 +1,1 @@
+export { ControllerComponent } from "./component";

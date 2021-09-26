@@ -1,6 +1,6 @@
-import { IEstimatedDiameter, INeoFeedQueryParameters } from '.';
-import { buildQueryParams, mean } from '../../shared';
-import { INearEarthObject, jsonFetch } from '../util';
+import { IEstimatedDiameter, INeoFeedQueryParameters, Velocity } from '.';
+import { buildQueryParams, INearEarthObject, mean } from '../../shared';
+import { jsonFetch } from '../util';
 import { INeoFeedResponse, INeoFeedObject, Units } from './models';
 
 export function getNeoFeed(param?: INeoFeedQueryParameters): Promise<INearEarthObject[]> {
@@ -23,8 +23,8 @@ function fromNasaNeo(obj: INeoFeedObject): INearEarthObject {
   const missDistances: number[] = [];
   const approachTimes: number[] = [];
   obj.close_approach_data.forEach(c => {
-    let v = Number(c.relative_velocity);
-    let d = Number(c.miss_distance);
+    let v = Number(c.relative_velocity[Velocity.KPH]);
+    let d = Number(c.miss_distance[Units.Kilometers]);
     let a = Number(c.epoch_date_close_approach);
     if (!isNaN(v)) {
       velocities.push(v);
@@ -44,7 +44,7 @@ function fromNasaNeo(obj: INeoFeedObject): INearEarthObject {
     sentry: obj.is_sentry_object === true,
     velocity: mean(velocities),
     missDistance: mean(missDistances),
-    visualMagnitude: `${obj.absolute_magnitude_h}`,
+    visualMagnitude: obj.absolute_magnitude_h,
     approachDateTime: Math.floor(mean(approachTimes))
   }
 }
