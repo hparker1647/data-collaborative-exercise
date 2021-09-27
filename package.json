@@ -7,12 +7,13 @@
     "build": "webpack",
     "build:app": "webpack --config webpack.app.config.js",
     "build:service": "webpack --config webpack.service.config.js",
+    "changelog": "standard-changelog",
     "recycle": "npm run build && npm run start",
     "start": "node -r dotenv/config ./dist/service.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "holdenparker1647@live.com",
   "license": "ISC",
   "devDependencies": {
     "@material/data-table": "^13.0.0",
@@ -30,6 +31,7 @@
     "node-fetch": "^3.0.0",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
+    "standard-changelog": "^2.0.27",
     "style-loader": "^3.3.0",
     "ts-loader": "^9.2.6",
     "tsc": "^2.0.3",
