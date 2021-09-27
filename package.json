@@ -15,11 +15,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@material/data-table": "^13.0.0",
+    "@material/mwc-button": "^0.25.1",
+    "@material/mwc-linear-progress": "^0.25.1",
+    "@material/mwc-textfield": "^0.25.1",
+    "@material/mwc-top-app-bar-fixed": "^0.25.1",
     "@types/express": "^4.17.13",
     "@types/node": "^16.10.1",
     "css-loader": "^6.3.0",
     "dart-sass": "^1.25.0",
-    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
@@ -34,6 +38,6 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
-    "@material/data-table": "^13.0.0"
+    "dotenv": "^10.0.0"
   }
 }

@@ -1,20 +1,30 @@
-import { IEstimatedDiameter, INeoFeedQueryParameters, Velocity } from '.';
-import { buildQueryParams, INearEarthObject, mean } from '../../shared';
+import { buildQueryParams, dateKeyToDate, IGetNeoFeedResponse, INearEarthObject, INeoFeedQueryParameters, mean } from '../../shared';
 import { jsonFetch } from '../util';
-import { INeoFeedResponse, INeoFeedObject, Units } from './models';
+import { INeoFeedResponse, INeoFeedObject, Units, Velocity, IEstimatedDiameter } from './models';
 
-export function getNeoFeed(param?: INeoFeedQueryParameters): Promise<INearEarthObject[]> {
+export function getNeoFeed(param?: INeoFeedQueryParameters): Promise<IGetNeoFeedResponse> {
+  let startDate: Date | undefined = dateKeyToDate((param || {}).start_date);
+  let endDate: Date | undefined = dateKeyToDate((param || {}).end_date);
   return jsonFetch<INeoFeedResponse>(`https://api.nasa.gov/neo/rest/v1/feed?${buildQueryParams({ api_key: process.env.NASA_API_KEY, ...param })}`, {
     method: 'GET'
   }).then(response => {
-    return Object.keys(response.near_earth_objects).reduce((result: INearEarthObject[], neoDate) => {
+    return Object.keys(response.near_earth_objects).reduce((result: IGetNeoFeedResponse, neoDate) => {
       if (response.near_earth_objects[neoDate]) {
+        let currDate = dateKeyToDate(neoDate)!;
+        if (startDate === undefined || startDate > currDate) {
+          startDate = currDate;
+          result.query.start_date = neoDate;
+        }
+        if (endDate === undefined || endDate < currDate) {
+          endDate = currDate;
+          result.query.end_date = neoDate;
+        }
         response.near_earth_objects[neoDate]!.forEach(neo => {
-          result.push(fromNasaNeo(neo));
+          result.objects.push(fromNasaNeo(neo));
         });
       }
       return result;
-    }, []);
+    }, { query: param || {}, objects: []});
   });
 }
 

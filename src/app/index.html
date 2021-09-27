@@ -4,9 +4,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <title>Holden Parker</title>
 </head>
 <body>
-  <example-table></example-table>
+  <mwc-top-app-bar-fixed class="full-size">
+    <div slot="title">Near Earth Objects</div>
+    <mwc-linear-progress indeterminate></mwc-linear-progress>
+    <div class="flex full-size query-row">
+      <mwc-textfield class="col" label="From Date" helper="YYYY-MM-DD" pattern="^\d\d\d\d-\d\d-\d\d$"></mwc-textfield>
+      <mwc-textfield class="col" label="To Date" helper="YYYY-MM-DD" pattern="^\d\d\d\d-\d\d-\d\d$"></mwc-textfield>
+      <mwc-button class="col" label="QUERY" raised></mwc-button>
+    </div>
+    <div class="flex full-size result-row">
+      <example-table></example-table>
+    </div>
+  </mwc-top-app-bar-fixed>
 </body>
 </html>

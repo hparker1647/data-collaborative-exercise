@@ -18,3 +18,16 @@ export interface INearEarthObject {
   /** The datetime of close approach, in ms from epoch. */
   approachDateTime: number;
 }
+
+export interface INeoFeedQueryParameters {
+  /** YYYY-MM-DD */
+  start_date?: string,
+  /** YYYY-MM-DD */
+  end_date?: string,
+  api_key?: string
+}
+
+export interface IGetNeoFeedResponse {
+  query: INeoFeedQueryParameters;
+  objects: INearEarthObject[];
+}

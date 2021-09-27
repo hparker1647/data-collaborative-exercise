@@ -15,14 +15,6 @@ export enum Velocity {
   MPH = 'miles_per_hour'
 }
 
-export interface INeoFeedQueryParameters {
-  /** YYYY-MM-DD */
-  start_date?: string,
-  /** YYYY-MM-DD */
-  end_date?: string,
-  api_key?: string
-}
-
 export interface INeoFeedResponse {
   links: INeoFeedLinks;
   element_count: 24;

@@ -1,12 +1,31 @@
-html, body {
+html, body, .full-size {
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 
 body {
   display: flex;
 }
 
+.col + .col {
+  margin-left: 16px;
+}
+
+.flex {
+  display: flex;
+}
+
 example-table {
   margin: 0 auto;
+}
+
+.query-row {
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid lightslategray;
+}
+
+.result-row {
+  padding: 8px 0;
 }

@@ -1,3 +1,7 @@
+import '@material/mwc-button';
+import '@material/mwc-linear-progress';
+import '@material/mwc-textfield';
+import '@material/mwc-top-app-bar-fixed';
 import { ControllerComponent } from "./controller";
 import { defineTableCustomElement } from "./table";
 
